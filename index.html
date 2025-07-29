@@ -89,6 +89,7 @@
         ]
     }
     </script>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <title>Hasan Torpil - Senior Frontend Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -1666,6 +1667,965 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .form-container {
+            background: var(--white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--gray-200);
+            width: 100%;
+            max-width: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .form-header {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .form-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+            opacity: 0.6;
+        }
+
+        .form-header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .form-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .form-body {
+            padding: 3rem 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group.half {
+            display: inline-block;
+            width: calc(50% - 0.5rem);
+        }
+
+        .form-group.half:first-child {
+            margin-right: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-label .required {
+            color: var(--error);
+            margin-left: 3px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--white);
+            transition: all 0.3s ease;
+            outline: none;
+            resize: none;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-input.error,
+        .form-textarea.error,
+        .form-select.error {
+            border-color: var(--error);
+            box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .success-message {
+            color: var(--success);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 1.25rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .submit-btn .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: none;
+        }
+
+        .submit-btn.loading .loading-spinner {
+            display: block;
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .form-footer {
+            background: var(--gray-50);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .form-footer-text {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .form-footer-text .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .success-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .success-modal {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 400px;
+            margin: 1rem;
+            box-shadow: var(--shadow-xl);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .success-overlay.show .success-modal {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .success-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .success-text {
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .form-container {
+                border-radius: 16px;
+            }
+
+            .form-header {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+
+            .form-title {
+                font-size: 1.5rem;
+            }
+
+            .form-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .form-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .form-row .form-group {
+                margin-bottom: 2rem;
+            }
+
+            .form-group.half {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-footer {
+                padding: 1.5rem;
+            }
+
+            .success-modal {
+                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .form-input,
+            .form-textarea,
+            .form-select {
+                padding: 0.875rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .submit-btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation for form elements */
+        .form-group {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+        .form-group:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-container {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: containerFadeIn 0.8s ease 0.2s forwards;
+        }
+
+        @keyframes containerFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+/* Contact Section Layout Fix */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    gap: 4rem;
+    margin-top: 4rem;
+    align-items: start;
+}
+
+/* Contact Info Section */
+.contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+/* Form Container Fixes */
+.form-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.form-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1.5rem;
+}
+
+.form-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.form-subtitle {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-body {
+    padding: 2.5rem 2rem;
+}
+
+/* Form Elements */
+.form-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    flex: 1;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.required {
+    color: #ff6b6b;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    border-color: var(--accent-light);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+    background: var(--gradient-accent);
+    color: var(--white);
+    border: none;
+    padding: 1.25rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+.submit-btn.loading .loading-spinner {
+    display: block;
+}
+
+.submit-btn.loading .btn-text {
+    display: none;
+}
+
+/* Contact Cards */
+.contact-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--white);
+    cursor: pointer;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--white);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: white;
+    margin: 0 auto 1rem;
+}
+
+.contact-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.contact-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+/* Additional Info */
+.additional-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.info-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.info-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+}
+
+.info-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+}
+
+.language-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.language-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.language-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+}
+
+.language-level {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.interests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.interest-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.interest-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.02);
+}
+
+.interest-emoji {
+    font-size: 1.25rem;
+}
+
+.interest-item span:last-child {
+    color: var(--white);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Contact Footer */
+.contact-footer {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.highlight {
+    color: var(--accent-light);
+    font-weight: 600;
+}
+
+/* Error Messages */
+.error-message {
+    color: #ff6b6b;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-input.error,
+.form-textarea.error,
+.form-select.error {
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
+}
+
+/* Success Modal */
+.success-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.success-modal {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    max-width: 400px;
+    margin: 1rem;
+    box-shadow: var(--shadow-xl);
+    transform: scale(0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.success-overlay.show .success-modal {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 1.5rem;
+    color: white;
+}
+
+.success-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.success-text {
+    color: var(--gray-600);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.close-btn {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .contact-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .form-row .form-group {
+        margin-bottom: 2rem;
+    }
+    
+    .contact-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .contact-card {
+        padding: 1.5rem 1rem;
+    }
+    
+    .interests-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .language-item {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .form-header {
+        padding: 2rem 1.5rem 1.5rem;
+    }
+    
+    .form-body {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-content {
+        gap: 2rem;
+    }
+    
+    .additional-info {
+        gap: 1.5rem;
+    }
+    
+    .info-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .contact-footer {
+        margin-top: 3rem;
+        padding-top: 2rem;
+    }
+}
+
+/* Animation fix */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
     </style>
 </head>
 <body>
@@ -2005,103 +2965,230 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section contact">
-        <div class="section-container">
-            <div class="section-header">
-                <p class="section-subtitle">İletişim</p>
-                <h2 class="section-title">Birlikte Çalışalım</h2>
-                <p class="section-description">
-                    Yeni projeler, iş fırsatları ve teknik işbirlikleri için benimle iletişime geçin.
-                </p>
-            </div>
-            <div class="contact-grid">
-                <a href="mailto:hasantorpil17@gmail.com" class="contact-card fade-in">
-                    <div class="contact-icon">
-                        <span>📧</span>
-                    </div>
-                    <div class="contact-label">E-posta</div>
-                    <div class="contact-value">hasantorpil17@gmail.com</div>
-                </a>
+<section id="contact" class="section contact">
+    <div class="section-container">
+        <div class="section-header">
+            <p class="section-subtitle">İletişim</p>
+            <h2 class="section-title">Birlikte Çalışalım</h2>
+            <p class="section-description">
+                Yeni projeler, iş fırsatları ve teknik işbirlikleri için benimle iletişime geçin.
+            </p>
+        </div>
 
-                <a href="tel:05337096620" class="contact-card fade-in">
-                    <div class="contact-icon">
-                        <span>📞</span>
-                    </div>
-                    <div class="contact-label">Telefon</div>
-                    <div class="contact-value">+90 533 709 66 20</div>
-                </a>
-
-                <a href="https://linkedin.com/in/hasantorpil" target="_blank" class="contact-card fade-in">
-                    <div class="contact-icon">
-                        <span>💼</span>
-                    </div>
-                    <div class="contact-label">LinkedIn</div>
-                    <div class="contact-value">linkedin.com/in/hasantorpil</div>
-                </a>
-
-                <div class="contact-card fade-in">
-                    <div class="contact-icon">
-                        <span>📍</span>
-                    </div>
-                    <div class="contact-label">Konum</div>
-                    <div class="contact-value">Şanlıurfa, Türkiye</div>
-                </div>
-            </div>
-
-            <!-- Additional Information -->
-            <div class="info-section">
-                <div class="info-card fade-in">
-                    <div class="info-header">
-                        <div class="info-icon">
-                            <span>🌐</span>
-                        </div>
-                        <h3 class="info-title">Dil Becerileri</h3>
-                    </div>
-                    <div class="language-list">
-                        <div class="language-item">
-                            <span class="language-name">🇹🇷 Türkçe</span>
-                            <span class="language-level">Ana Dil</span>
-                        </div>
-                        <div class="language-item">
-                            <span class="language-name">🇬🇧 İngilizce</span>
-                            <span class="language-level">Orta (B1)</span>
-                        </div>
+        <!-- Main Contact Content -->
+        <div class="contact-content">
+            <!-- Contact Form -->
+            <div class="form-container">
+                <!-- Form Header -->
+                <div class="form-header">
+                    <div class="form-header-content">
+                        <div class="form-icon">📧</div>
+                        <h3 class="form-title">İletişime Geçin</h3>
+                        <p class="form-subtitle">Projeleriniz için benimle iletişime geçmekten çekinmeyin</p>
                     </div>
                 </div>
 
-                <div class="info-card fade-in">
-                    <div class="info-header">
-                        <div class="info-icon">
-                            <span>🎯</span>
+                <!-- Form Body -->
+                <div class="form-body">
+                    <form id="contactForm" novalidate>
+                        <!-- Name and Email Row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">
+                                    Ad Soyad <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="fullName" 
+                                    name="fullName" 
+                                    class="form-input" 
+                                    placeholder="Adınızı ve soyadınızı girin"
+                                    required
+                                >
+                                <div class="error-message" id="fullNameError"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">
+                                    E-posta Adresi <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="email" 
+                                    id="email" 
+                                    name="email" 
+                                    class="form-input" 
+                                    placeholder="ornek@email.com"
+                                    required
+                                >
+                                <div class="error-message" id="emailError"></div>
+                            </div>
                         </div>
-                        <h3 class="info-title">İlgi Alanları</h3>
+
+                        <!-- Phone and Subject Row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Telefon</label>
+                                <input 
+                                    type="tel" 
+                                    id="phone" 
+                                    name="phone" 
+                                    class="form-input" 
+                                    placeholder="+90 5XX XXX XX XX"
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" class="form-label">
+                                    Konu <span class="required">*</span>
+                                </label>
+                                <select id="subject" name="subject" class="form-select" required>
+                                    <option value="">Konu seçin</option>
+                                    <option value="web-development">Web Geliştirme</option>
+                                    <option value="frontend-development">Frontend Geliştirme</option>
+                                    <option value="consulting">Danışmanlık</option>
+                                    <option value="job-opportunity">İş Fırsatı</option>
+                                    <option value="collaboration">İşbirliği</option>
+                                    <option value="other">Diğer</option>
+                                </select>
+                                <div class="error-message" id="subjectError"></div>
+                            </div>
+                        </div>
+
+                        <!-- Message -->
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                Mesajınız <span class="required">*</span>
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                class="form-textarea" 
+                                placeholder="Projeniz hakkında detayları paylaşın..."
+                                required
+                            ></textarea>
+                            <div class="error-message" id="messageError"></div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <div class="loading-spinner"></div>
+                            <span class="btn-text">
+                                <span>📤</span>
+                                Mesaj Gönder
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contact Info Cards -->
+            <div class="contact-info-section">
+                <div class="contact-cards-grid">
+                    <a href="mailto:hasantorpil17@gmail.com" class="contact-card fade-in">
+                        <div class="contact-icon">
+                            <span>📧</span>
+                        </div>
+                        <div class="contact-label">E-posta</div>
+                        <div class="contact-value">hasantorpil17@gmail.com</div>
+                    </a>
+
+                    <a href="tel:05337096620" class="contact-card fade-in">
+                        <div class="contact-icon">
+                            <span>📞</span>
+                        </div>
+                        <div class="contact-label">Telefon</div>
+                        <div class="contact-value">+90 533 709 66 20</div>
+                    </a>
+
+                    <a href="https://linkedin.com/in/hasantorpil" target="_blank" class="contact-card fade-in">
+                        <div class="contact-icon">
+                            <span>💼</span>
+                        </div>
+                        <div class="contact-label">LinkedIn</div>
+                        <div class="contact-value">linkedin.com/in/hasantorpil</div>
+                    </a>
+
+                    <div class="contact-card fade-in">
+                        <div class="contact-icon">
+                            <span>📍</span>
+                        </div>
+                        <div class="contact-label">Konum</div>
+                        <div class="contact-value">Şanlıurfa, Türkiye</div>
                     </div>
-                    <div class="interests-grid">
-                        <div class="interest-item">
-                            <span class="interest-emoji">📚</span>
-                            <span>Teknoloji Kitapları</span>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="additional-info">
+                    <div class="info-card fade-in">
+                        <div class="info-header">
+                            <div class="info-icon">
+                                <span>🌐</span>
+                            </div>
+                            <h4 class="info-title">Dil Becerileri</h4>
                         </div>
-                        <div class="interest-item">
-                            <span class="interest-emoji">🏃‍♂️</span>
-                            <span>Fitness & Koşu</span>
+                        <div class="language-list">
+                            <div class="language-item">
+                                <span class="language-name">🇹🇷 Türkçe</span>
+                                <span class="language-level">Ana Dil</span>
+                            </div>
+                            <div class="language-item">
+                                <span class="language-name">🇬🇧 İngilizce</span>
+                                <span class="language-level">Orta (B1)</span>
+                            </div>
                         </div>
-                    
-                        <div class="interest-item">
-                            <span class="interest-emoji">💻</span>
-                            <span>Open Source</span>
+                    </div>
+
+                    <div class="info-card fade-in">
+                        <div class="info-header">
+                            <div class="info-icon">
+                                <span>🎯</span>
+                            </div>
+                            <h4 class="info-title">İlgi Alanları</h4>
                         </div>
-                      
-                        <div class="interest-item">
-                            <span class="interest-emoji">✈️</span>
-                            <span>Seyahat</span>
+                        <div class="interests-grid">
+                            <div class="interest-item">
+                                <span class="interest-emoji">📚</span>
+                                <span>Teknoloji Kitapları</span>
+                            </div>
+                            <div class="interest-item">
+                                <span class="interest-emoji">🏃‍♂️</span>
+                                <span>Fitness & Koşu</span>
+                            </div>
+                            <div class="interest-item">
+                                <span class="interest-emoji">💻</span>
+                                <span>Open Source</span>
+                            </div>
+                            <div class="interest-item">
+                                <span class="interest-emoji">✈️</span>
+                                <span>Seyahat</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
+        <!-- Footer Info -->
+        <div class="contact-footer">
+            <p class="footer-text">
+                <span class="highlight">24 saat içinde</span> size geri dönüş yapacağım. 
+                Acil durumlar için yukarıdaki iletişim bilgilerini kullanabilirsiniz.
+            </p>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-modal">
+            <div class="success-icon">✅</div>
+            <h3 class="success-title">Mesajınız Gönderildi!</h3>
+            <p class="success-text">
+                Teşekkürler! Mesajınızı aldım ve en kısa sürede size geri dönüş yapacağım.
+            </p>
+            <button class="close-btn" onclick="closeSuccessModal()">Tamam</button>
+        </div>
+    </div>
+</section>
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -2131,7 +3218,7 @@
         <span>⬆️</span>
     </button>
 
-    <script>
+   <script>
         // Mobile Menu Functions
         function toggleMobileMenu() {
             const mobileMenu = document.getElementById('mobile-menu');
@@ -2339,6 +3426,615 @@
                 console.log('Portfolio loaded successfully! 🚀');
             });
         }
-    </script>
+
+        // Form validation and submission
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successOverlay = document.getElementById('successOverlay');
+
+        // Validation rules
+        const validationRules = {
+            fullName: {
+                required: true,
+                minLength: 2,
+                pattern: /^[a-zA-ZğüşıöçĞÜŞİÖÇ\s]+$/,
+                message: {
+                    required: '👤 Ad Soyad zorunludur',
+                    minLength: '👤 En az 2 karakter olmalıdır',
+                    pattern: '👤 Sadece harf ve boşluk kullanabilirsiniz'
+                }
+            },
+            email: {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: {
+                    required: '📧 E-posta adresi zorunludur',
+                    pattern: '📧 Geçerli bir e-posta adresi girin'
+                }
+            },
+            phone: {
+                required: false,
+                pattern: /^[\+]?[0-9\s\-\(\)]{10,}$/,
+                message: {
+                    pattern: '📞 Geçerli bir telefon numarası girin'
+                }
+            },
+            subject: {
+                required: true,
+                message: {
+                    required: '📋 Konu seçimi zorunludur'
+                }
+            },
+            message: {
+                required: true,
+                minLength: 10,
+                maxLength: 1000,
+                message: {
+                    required: '💬 Mesaj zorunludur',
+                    minLength: '💬 En az 10 karakter olmalıdır',
+                    maxLength: '💬 En fazla 1000 karakter olabilir'
+                }
+            }
+        };
+
+        // Validate single field
+        function validateField(fieldName, value) {
+            const rules = validationRules[fieldName];
+            if (!rules) return { isValid: true };
+
+            const errors = [];
+
+            // Required check
+            if (rules.required && (!value || value.trim() === '')) {
+                errors.push(rules.message.required);
+            }
+
+            // Skip other validations if field is empty and not required
+            if (!value || value.trim() === '') {
+                return { isValid: !rules.required, errors };
+            }
+
+            // Min length check
+            if (rules.minLength && value.length < rules.minLength) {
+                errors.push(rules.message.minLength);
+            }
+
+            // Max length check
+            if (rules.maxLength && value.length > rules.maxLength) {
+                errors.push(rules.message.maxLength);
+            }
+
+            // Pattern check
+            if (rules.pattern && !rules.pattern.test(value)) {
+                errors.push(rules.message.pattern);
+            }
+
+            return {
+                isValid: errors.length === 0,
+                errors
+            };
+        }
+
+        // Show field error
+        function showFieldError(fieldName, errors) {
+            const field = document.getElementById(fieldName);
+            const errorDiv = document.getElementById(fieldName + 'Error');
+            
+            if (errors && errors.length > 0) {
+                field.classList.add('error');
+                errorDiv.innerHTML = errors[0];
+                errorDiv.style.display = 'flex';
+            } else {
+                field.classList.remove('error');
+                errorDiv.style.display = 'none';
+            }
+        }
+
+        // Real-time validation
+        Object.keys(validationRules).forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field) {
+                field.addEventListener('blur', function() {
+                    const validation = validateField(fieldName, this.value);
+                    showFieldError(fieldName, validation.errors);
+                });
+
+                field.addEventListener('input', function() {
+                    // Clear error on input
+                    if (this.classList.contains('error')) {
+                        const validation = validateField(fieldName, this.value);
+                        if (validation.isValid) {
+                            showFieldError(fieldName, []);
+                        }
+                    }
+                });
+            }
+        });
+
+        // Phone number formatting
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('90')) {
+                value = '+' + value;
+            } else if (value.startsWith('5') && value.length <= 10) {
+                value = '+90 ' + value;
+            }
+            
+            // Format as +90 5XX XXX XX XX
+            if (value.startsWith('+90')) {
+                const digits = value.slice(3).replace(/\D/g, '');
+                if (digits.length > 0) {
+                    let formatted = '+90';
+                    if (digits.length > 0) formatted += ' ' + digits.slice(0, 3);
+                    if (digits.length > 3) formatted += ' ' + digits.slice(3, 6);
+                    if (digits.length > 6) formatted += ' ' + digits.slice(6, 8);
+                    if (digits.length > 8) formatted += ' ' + digits.slice(8, 10);
+                    value = formatted;
+                }
+            }
+            
+            e.target.value = value;
+        });
+
+        // 🚀 EmailJS ile Form Gönderimi (GÜNCELLENMIŞ)
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            let isFormValid = true;
+            const formData = new FormData(form);
+            
+            Object.keys(validationRules).forEach(fieldName => {
+                const value = formData.get(fieldName) || '';
+                const validation = validateField(fieldName, value);
+                showFieldError(fieldName, validation.errors);
+                
+                if (!validation.isValid) {
+                    isFormValid = false;
+                }
+            });
+
+            if (!isFormValid) {
+                // Scroll to first error
+                const firstError = form.querySelector('.form-input.error, .form-textarea.error, .form-select.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+                return;
+            }
+
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+
+            try {
+                // 📧 EmailJS ile gerçek email gönderimi
+                const templateParams = {
+                    from_name: formData.get('fullName'),
+                    from_email: formData.get('email'),
+                    phone: formData.get('phone') || 'Belirtilmedi',
+                    subject: formData.get('subject'),
+                    message: formData.get('message'),
+                    to_email: 'hasantorpil17@gmail.com',
+                    reply_to: formData.get('email'),
+                    date: new Date().toLocaleString('tr-TR')
+                };
+
+                console.log('📤 Email gönderiliyor...', templateParams);
+
+                const response = await emailjs.send(
+                    'service_8rh9szz',        // Service ID
+                    'template_wzkiqvg',       // Template ID - EmailJS dashboard'dan alın
+                    templateParams
+                );
+
+                if (response.status === 200) {
+                    console.log('✅ Email başarıyla gönderildi:', response);
+                    
+                    // Show success modal
+                    showSuccess();
+                    
+                    // Reset form
+                    form.reset();
+                    clearSavedData();
+                    charCounter.textContent = `0/${validationRules.message.maxLength}`;
+                    charCounter.style.color = 'var(--gray-500)';
+                    
+                    // Analytics event (opsiyonel)
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'form_submit', {
+                            event_category: 'Contact',
+                            event_label: 'Email Sent Successfully'
+                        });
+                    }
+                } else {
+                    throw new Error(`EmailJS responded with status: ${response.status}`);
+                }
+                
+            } catch (error) {
+                console.error('❌ Email gönderme hatası:', error);
+                
+                let errorMessage = 'Mesaj gönderilirken bir hata oluştu. ';
+                
+                // Hata tipine göre mesaj özelleştir
+                if (error.status === 400) {
+                    errorMessage += 'Form verilerinde bir sorun var.';
+                } else if (error.status === 401) {
+                    errorMessage += 'EmailJS yapılandırması hatası.';
+                } else if (error.status === 402) {
+                    errorMessage += 'EmailJS limit aşıldı.';
+                } else if (error.status === 403) {
+                    errorMessage += 'EmailJS erişim reddedildi.';
+                } else if (error.status === 404) {
+                    errorMessage += 'EmailJS servis veya template bulunamadı.';
+                } else {
+                    errorMessage += 'Ağ bağlantısını kontrol edin.';
+                }
+                
+                errorMessage += ' Lütfen tekrar deneyin veya direkt email gönderin: hasantorpil17@gmail.com';
+                
+                alert(errorMessage);
+                
+                // Analytics error event (opsiyonel)
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_error', {
+                        event_category: 'Contact',
+                        event_label: `EmailJS Error: ${error.status || 'Unknown'}`,
+                        value: error.status || 0
+                    });
+                }
+            } finally {
+                // Hide loading state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // 🧪 Test fonksiyonu (geliştirme aşamasında kullanabilirsiniz)
+        function testEmailJS() {
+            emailjs.send('service_8rh9szz', 'template_wzkiqvg', {
+                from_name: 'Test User',
+                from_email: 'test@example.com',
+                phone: '+90 555 123 45 67',
+                subject: 'Test Mesajı',
+                message: 'Bu bir test mesajıdır.',
+                to_email: 'hasantorpil17@gmail.com',
+                date: new Date().toLocaleString('tr-TR')
+            })
+            .then(function(response) {
+                console.log('✅ Test email SUCCESS!', response.status, response.text);
+                alert('Test email başarıyla gönderildi!');
+            }, function(error) {
+                console.log('❌ Test email FAILED...', error);
+                alert('Test email gönderilirken hata oluştu: ' + error.text);
+            });
+        }
+
+        // Show success modal
+        function showSuccess() {
+            successOverlay.style.display = 'flex';
+            setTimeout(() => {
+                successOverlay.classList.add('show');
+            }, 10);
+        }
+
+        // Close success modal
+        function closeSuccessModal() {
+            successOverlay.classList.remove('show');
+            setTimeout(() => {
+                successOverlay.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal on overlay click
+        successOverlay.addEventListener('click', function(e) {
+            if (e.target === successOverlay) {
+                closeSuccessModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && successOverlay.classList.contains('show')) {
+                closeSuccessModal();
+            }
+        });
+
+        // Character counter for message
+        const messageField = document.getElementById('message');
+        const messageGroup = messageField.parentElement;
+
+        const charCounter = document.createElement('div');
+        charCounter.style.cssText = `
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            text-align: right;
+            margin-top: 0.5rem;
+        `;
+        messageGroup.appendChild(charCounter);
+
+        messageField.addEventListener('input', function() {
+            const length = this.value.length;
+            const maxLength = validationRules.message.maxLength;
+            charCounter.textContent = `${length}/${maxLength}`;
+            
+            if (length > maxLength * 0.9) {
+                charCounter.style.color = 'var(--warning)';
+            } else if (length >= maxLength) {
+                charCounter.style.color = 'var(--error)';
+            } else {
+                charCounter.style.color = 'var(--gray-500)';
+            }
+        });
+
+        // Initial character count
+        charCounter.textContent = `0/${validationRules.message.maxLength}`;
+
+        // Form enhancement: Auto-save to localStorage
+        const STORAGE_KEY = 'contactFormData';
+        
+        function saveFormData() {
+            const formData = new FormData(form);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function loadFormData() {
+            try {
+                const savedData = localStorage.getItem(STORAGE_KEY);
+                if (savedData) {
+                    const data = JSON.parse(savedData);
+                    Object.keys(data).forEach(key => {
+                        const field = document.getElementById(key);
+                        if (field && data[key]) {
+                            field.value = data[key];
+                            // Trigger input event for character counter
+                            if (key === 'message') {
+                                field.dispatchEvent(new Event('input'));
+                            }
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading form data:', error);
+            }
+        }
+
+        function clearSavedData() {
+            localStorage.removeItem(STORAGE_KEY);
+        }
+
+        // Auto-save form data on input
+        form.addEventListener('input', function() {
+            saveFormData();
+        });
+
+        // Load saved data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFormData();
+        });
+
+        // Clear saved data on successful submission
+        const originalShowSuccess = showSuccess;
+        showSuccess = function() {
+            clearSavedData();
+            originalShowSuccess();
+        };
+
+        // Copy to clipboard functionality
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text);
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                return new Promise((resolve, reject) => {
+                    document.execCommand('copy') ? resolve() : reject();
+                    textArea.remove();
+                });
+            }
+        }
+
+        // Add click handlers for contact info
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.style.cursor = 'pointer';
+            item.title = 'Kopyalamak için tıklayın';
+            
+            item.addEventListener('click', function() {
+                const text = this.textContent.trim();
+                const value = text.split(' ').slice(1).join(' '); // Remove emoji
+                
+                copyToClipboard(value).then(() => {
+                    // Show temporary feedback
+                    const originalContent = this.innerHTML;
+                    this.innerHTML = '<span>✅</span><span>Kopyalandı!</span>';
+                    this.style.color = 'var(--success)';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalContent;
+                        this.style.color = '';
+                    }, 2000);
+                }).catch(() => {
+                    console.error('Clipboard copy failed');
+                });
+            });
+        });
+
+        // Accessibility improvements
+        form.setAttribute('aria-label', 'İletişim formu');
+        
+        // Add ARIA labels to required fields
+        document.querySelectorAll('input[required], select[required], textarea[required]').forEach(field => {
+            field.setAttribute('aria-required', 'true');
+        });
+
+        // Enhanced form validation with better UX
+        let validationTimeout;
+        function debounceValidation(fieldName, value) {
+            clearTimeout(validationTimeout);
+            validationTimeout = setTimeout(() => {
+                const validation = validateField(fieldName, value);
+                showFieldError(fieldName, validation.errors);
+            }, 300);
+        }
+
+        // Replace immediate validation with debounced validation
+        Object.keys(validationRules).forEach(fieldName => {
+            const field = document.getElementById(fieldName);
+            if (field) {
+                // Remove previous event listeners and add debounced ones
+                field.removeEventListener('input', function() {});
+                field.addEventListener('input', function() {
+                    // Clear error immediately when user starts typing
+                    if (this.classList.contains('error')) {
+                        this.classList.remove('error');
+                        const errorDiv = document.getElementById(fieldName + 'Error');
+                        errorDiv.style.display = 'none';
+                    }
+                    
+                    // Debounced validation for better UX
+                    if (this.value.trim()) {
+                        debounceValidation(fieldName, this.value);
+                    }
+                });
+            }
+        });
+
+        // Progressive enhancement for modern browsers
+        if ('IntersectionObserver' in window) {
+            const formObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.style.opacity = '1';
+                    }
+                });
+            });
+
+            if (form) {
+                formObserver.observe(form);
+            }
+        }
+
+        // Form analytics (privacy-friendly)
+        let formInteractionStartTime = null;
+        let fieldFocusCount = {};
+
+        if (form) {
+            form.addEventListener('focusin', function(e) {
+                if (!formInteractionStartTime) {
+                    formInteractionStartTime = Date.now();
+                }
+                
+                const fieldName = e.target.name;
+                if (fieldName) {
+                    fieldFocusCount[fieldName] = (fieldFocusCount[fieldName] || 0) + 1;
+                }
+            });
+        }
+
+        // Performance monitoring
+        if ('PerformanceObserver' in window) {
+            try {
+                const perfObserver = new PerformanceObserver((list) => {
+                    const entries = list.getEntries();
+                    entries.forEach(entry => {
+                        if (entry.entryType === 'measure' && entry.name === 'form-submission') {
+                            console.log(`Form submission took: ${entry.duration}ms`);
+                        }
+                    });
+                });
+                perfObserver.observe({ entryTypes: ['measure'] });
+            } catch (e) {
+                // PerformanceObserver not supported
+            }
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to submit form
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                if (submitBtn && !submitBtn.disabled) {
+                    form.dispatchEvent(new Event('submit'));
+                }
+            }
+            
+            // Ctrl/Cmd + R to reset form (with confirmation)
+            if ((e.ctrlKey || e.metaKey) && e.key === 'r') {
+                e.preventDefault();
+                if (confirm('Formu sıfırlamak istediğinizden emin misiniz?')) {
+                    if (form) form.reset();
+                    clearSavedData();
+                    // Reset character counter
+                    if (charCounter) {
+                        charCounter.textContent = `0/${validationRules.message.maxLength}`;
+                        charCounter.style.color = 'var(--gray-500)';
+                    }
+                }
+            }
+        });
+
+        // Add tooltip for keyboard shortcuts
+        if (form) {
+            const keyboardHint = document.createElement('div');
+            keyboardHint.innerHTML = `
+                <small style="color: rgba(255, 255, 255, 0.6); font-size: 0.75rem; text-align: center; display: block; margin-top: 1rem;">
+                    💡 <strong>İpucu:</strong> Ctrl+Enter ile gönder, Ctrl+R ile sıfırla
+                </small>
+            `;
+            form.appendChild(keyboardHint);
+        }
+
+        // Form validation summary for screen readers
+        function updateFormSummary() {
+            let existingSummary = document.getElementById('form-validation-summary');
+            if (existingSummary) {
+                existingSummary.remove();
+            }
+
+            if (form) {
+                const errors = form.querySelectorAll('.error-message:not([style*="display: none"])');
+                if (errors.length > 0) {
+                    const summary = document.createElement('div');
+                    summary.id = 'form-validation-summary';
+                    summary.setAttribute('role', 'alert');
+                    summary.setAttribute('aria-live', 'polite');
+                    summary.style.cssText = `
+                        position: absolute;
+                        left: -10000px;
+                        width: 1px;
+                        height: 1px;
+                        overflow: hidden;
+                    `;
+                    summary.textContent = `Formda ${errors.length} hata bulundu. Lütfen düzeltin.`;
+                    form.appendChild(summary);
+                }
+            }
+        }
+
+        // Call validation summary update when errors change
+        const originalShowFieldError = showFieldError;
+        showFieldError = function(fieldName, errors) {
+            originalShowFieldError(fieldName, errors);
+            setTimeout(updateFormSummary, 100);
+        };
+
+        console.log('🚀 Portfolio loaded successfully!');
+        console.log('📧 EmailJS integration ready!');
+        console.log('✨ Features: Real-time validation, auto-save, keyboard shortcuts, email sending');
+</script>
 </body>
 </html>
